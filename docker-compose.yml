@@ -1,0 +1,19 @@
+version: '3'
+services:
+  graphite_exporter:
+    image: prom/graphite-exporter:v0.14.0
+    ports:
+     - "9108:9108"
+     - "9109:9109"
+  prometheus:
+    image: prom/prometheus:v2.47.2
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+  grafana:
+    image: grafana/grafana:10.2.0
+    ports:
+     - "3000:3000"
+    volumes:
+      - ./grafana/:/etc/grafana/provisioning/datasources/
